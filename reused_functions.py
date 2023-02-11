@@ -266,3 +266,26 @@ def compare_historys(original_history, new_history, initial_epochs=5):
     plt.title('Training and Validation Loss')
     plt.xlabel('epoch')
     plt.show()
+    
+# Function to evaluate accuracy, precision, recall and f1-score.
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support    
+def calculate_results(y_true, y_pred):
+  """
+  Calculates model accuracy, precision, recall and f1 score.
+
+  Args:
+      y_true: true labels in the form of 1D array
+      y_pred: predicted labels in the form of 1D array
+
+  Returns a dictionary of accuracy, precision, recall, f1-score.
+  """
+
+  model_accuracy = accuracy_score(y_true, y_pred) * 100
+  precision, recall, f1_score, _ = precision_recall_fscore_support(y_true, y_pred, average = "weighted")
+
+  model_results = {"accuracy": model_accuracy,
+                   "precision": precision,
+                   "recall": recall,
+                   "f1_score": f1_score}
+
+  return model_results
